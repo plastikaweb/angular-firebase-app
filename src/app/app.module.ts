@@ -12,20 +12,29 @@ import {LessonsService} from './shared/lessons.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import { LessonsListComponent } from './lessons-list/lessons-list.component';
+import {routing} from './app-routing.module';
+import { TopMenuComponent } from './top-menu/top-menu.component';
+import { CoursesComponent } from './courses/courses.component';
+import {CoursesService} from './shared/courses.service';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
 
 @NgModule( {
     declarations: [
         AppComponent,
         HomeComponent,
-        LessonsListComponent
+        LessonsListComponent,
+        TopMenuComponent,
+        CoursesComponent,
+        CourseDetailComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
+        routing,
         AngularFireModule.initializeApp(firebaseConfig)
     ],
-    providers: [LessonsService],
+    providers: [LessonsService, CoursesService],
     bootstrap: [AppComponent]
 } )
 export class AppModule {

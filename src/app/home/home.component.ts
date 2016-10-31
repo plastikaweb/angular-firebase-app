@@ -10,6 +10,7 @@ import {Lesson} from '../shared/lesson';
 export class HomeComponent implements OnInit {
   allLessons: Lesson[];
   filtered: Lesson[];
+  searchWord: string;
   constructor(private lessonsService: LessonsService) { }
 
   ngOnInit() {
@@ -18,6 +19,12 @@ export class HomeComponent implements OnInit {
         .subscribe(
             lessons => this.allLessons = this.filtered = lessons
         )
+  }
+
+  search() {
+    this.filtered = this.allLessons.filter(
+        (lesson: Lesson) => lesson.description.includes(this.searchWord)
+    );
   }
 
 }

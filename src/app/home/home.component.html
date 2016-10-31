@@ -1,7 +1,8 @@
 <h2>All Lessons</h2>
 <h4>Total Lessons: {{lessons?.length}}</h4>
 
-<input type="text" class="search-bar" placeholder="Search">
+<input [(ngModel)]="searchWord" type="text" class="search-bar"
+       (keyup)="search()" placeholder="Search">
 
 <div class="lessons-list-container v-h-center-block-parent">
     <app-lessons-list [lessons]="filtered"></app-lessons-list>
