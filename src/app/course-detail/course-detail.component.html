@@ -8,6 +8,8 @@
         <button (click)="next()">Next Page</button>
     </div>
 
-    <app-lessons-list *ngIf="lessons" [lessons]="lessons"></app-lessons-list>
+    <app-lessons-list *ngIf="lessons"
+                      [lessons]="lessons"
+                        (lesson)="navigateToLesson($event)"></app-lessons-list>
 
 </div>

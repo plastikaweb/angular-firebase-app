@@ -17,6 +17,8 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
 import { CoursesComponent } from './courses/courses.component';
 import {CoursesService} from './shared/courses.service';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
+import { SafeUrlPipe } from './shared/safe-url.pipe';
 
 @NgModule( {
     declarations: [
@@ -25,7 +27,9 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
         LessonsListComponent,
         TopMenuComponent,
         CoursesComponent,
-        CourseDetailComponent
+        CourseDetailComponent,
+        LessonDetailComponent,
+        SafeUrlPipe
     ],
     imports: [
         BrowserModule,
