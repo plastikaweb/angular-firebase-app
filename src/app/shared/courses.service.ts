@@ -17,20 +17,23 @@ export class CoursesService {
             .map( Course.fromJsonÄrray );
     }
 
-    findCourseByUrl(courseUrl: string): Observable<Course> {
-        return this.db.list( 'courses')
-            .map( results => results[0]);
+    findCourseByUrl(courseUrl:string): Observable<Course> {
+        return this.db.list('courses', {
+            query: {
+                orderByChild: 'url',
+                equalTo: courseUrl
+            }
+        })
+            .map(results => results[0]);
     }
 
-    findLessonKeysPerCourseUrl(courseUrl: string,
+    findLessonKeysPerCourseUrl(courseUrl:string,
                                query: FirebaseListFactoryOpts = {}): Observable<string[]> {
-        return this.findCourseByUrl( courseUrl )
-            .switchMap( course => {
-                console.log(course);
-                this.currentCourse = course || this.currentCourse;
-                return this.db.list( 'lessonsPerCourse/' + this.currentCourse.$key, query )
-            } )
-            .map( lspc => lspc.map( lpc => lpc.$key ) );
+        return this.findCourseByUrl(courseUrl)
+            .do(val => console.log("course",val))
+            .filter(course => !!course)
+            .switchMap(course => this.db.list(`lessonsPerCourse/${course.$key}`,query))
+            .map( lspc => lspc.map(lpc => lpc.$key) );
     }
 
     findLessonsForLessonKeys(lessonKeys: Observable<string[]>): Observable<Lesson[]> {
